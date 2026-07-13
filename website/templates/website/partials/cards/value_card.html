@@ -1,0 +1,8 @@
+{% load website_extras %}
+<div class="card-skyblue reveal text-center">
+    <div class="icon-box mx-auto">
+        <i class="bi {{ value.icon|default:'bi-heart' }}"></i>
+    </div>
+    <h4>{{ value.title }}</h4>
+    <p>{{ value.description|truncatewords:20 }}</p>
+</div>

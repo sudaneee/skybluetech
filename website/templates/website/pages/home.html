@@ -1,0 +1,288 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}{{ site_settings.site_name }} — {{ site_settings.tagline }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    {% with slide=hero_slides.first %}
+    {% if slide.background_image %}
+    <div class="hero-bg" style="background-image:url('{{ slide.background_image.url }}');"></div>
+    {% endif %}
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="hero-badge reveal">
+            <i class="bi bi-stars"></i>
+            <span>Welcome to {{ site_settings.site_name }}</span>
+        </div>
+        <h1 class="reveal">{{ slide.headline|default:"Innovative Technology Solutions for a Smarter Tomorrow" }}</h1>
+        <p class="lead reveal">{{ slide.subheadline|default:site_settings.tagline }}</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3 reveal">
+            <a href="{{ slide.cta_url|default:'/contact/' }}" class="btn btn-primary btn-lg">
+                {{ slide.cta_text|default:"Get Started" }}
+            </a>
+            {% if slide.secondary_cta_text %}
+            <a href="{{ slide.secondary_cta_url }}" class="btn btn-outline-light btn-lg">
+                {{ slide.secondary_cta_text }}
+            </a>
+            {% else %}
+            <a href="{% url 'products' %}" class="btn btn-outline-light btn-lg">Explore Products</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endwith %}
+</section>
+
+<!-- Stats Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-6 col-lg-3">
+                <div class="stat-card reveal">
+                    <div class="counter stat-number" data-target="{{ about.years_experience }}">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-card reveal">
+                    <div class="counter stat-number" data-target="{{ about.clients_served }}">0</div>
+                    <div class="stat-label">Clients Served</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-card reveal">
+                    <div class="counter stat-number" data-target="{{ about.projects_completed }}">0</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-card reveal">
+                    <div class="counter stat-number" data-target="{{ about.countries_served }}">0</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 reveal">
+                {% if about.image %}
+                <img src="{{ about.image.url }}" alt="About Skyblue Technology" class="img-fluid rounded-4 shadow">
+                {% else %}
+                <div class="rounded-4 shadow d-flex align-items-center justify-content-center" style="height:400px;background:linear-gradient(135deg,var(--skyblue-primary),var(--skyblue-sky));">
+                    <i class="bi bi-building text-white" style="font-size:120px;"></i>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-6 reveal">
+                <span class="text-primary fw-bold text-uppercase ls-1">Who We Are</span>
+                <h2 class="section-title mt-2">{{ about.title }}</h2>
+                <div class="text-muted mb-4">{{ about.content|safe|truncatewords:60 }}</div>
+                <a href="{% url 'about' %}" class="btn btn-primary">Learn More About Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section section-light">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Why Choose Us</span>
+            <h2 class="section-title">The Skyblue Advantage</h2>
+            <p class="section-subtitle mx-auto">We combine innovation, expertise, and dedication to deliver exceptional technology solutions.</p>
+        </div>
+        <div class="row g-4">
+            {% for reason in why_choose_us %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card-skyblue reveal">
+                    <div class="icon-box">
+                        <i class="bi {{ reason.icon|default:'bi-check-circle' }}"></i>
+                    </div>
+                    <h4>{{ reason.title }}</h4>
+                    <p>{{ reason.description|truncatewords:20 }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No reasons configured yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Our Products</span>
+            <h2 class="section-title">Powerful Solutions for Every Industry</h2>
+            <p class="section-subtitle mx-auto">Discover our flagship products designed to transform education, healthcare, commerce, and payments.</p>
+        </div>
+        <div class="row g-4">
+            {% for product in featured_products %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/product_card.html' with product=product %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No products available.</div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="{% url 'products' %}" class="btn btn-outline-primary btn-lg">View All Products</a>
+        </div>
+    </div>
+</section>
+
+<!-- SkyCollect Highlight -->
+<section class="section section-dark">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 reveal">
+                <span class="text-sky fw-bold text-uppercase">Flagship Product</span>
+                <h2 class="section-title mt-2 text-white">SkyCollect</h2>
+                <p class="mb-4" style="color:rgba(255,255,255,0.8);">
+                    SkyCollect powers all payment collections across every Skyblue Technology solution.
+                    From schools to hospitals, merchants to individuals — experience secure, seamless,
+                    and intelligent financial transactions.
+                </p>
+                <div class="row g-3">
+                    <div class="col-6"><i class="bi bi-wallet2 text-sky me-2"></i> Wallet</div>
+                    <div class="col-6"><i class="bi bi-bank text-sky me-2"></i> Virtual Accounts</div>
+                    <div class="col-6"><i class="bi bi-credit-card text-sky me-2"></i> Payment Gateway</div>
+                    <div class="col-6"><i class="bi bi-graph-up text-sky me-2"></i> Analytics</div>
+                    <div class="col-6"><i class="bi bi-shield-check text-sky me-2"></i> Security</div>
+                    <div class="col-6"><i class="bi bi-clock-history text-sky me-2"></i> Monitoring</div>
+                </div>
+                <a href="{% url 'products' %}" class="btn btn-primary mt-4">Explore SkyCollect</a>
+            </div>
+            <div class="col-lg-6 reveal">
+                <div class="rounded-4 p-5 text-center" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);">
+                    <i class="bi bi-cloud-check-fill text-sky" style="font-size:140px;"></i>
+                    <h3 class="text-white mt-4">One Platform. All Payments.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Our Services</span>
+            <h2 class="section-title">Comprehensive Technology Services</h2>
+            <p class="section-subtitle mx-auto">From software development to cybersecurity, we deliver end-to-end ICT solutions.</p>
+        </div>
+        <div class="row g-4">
+            {% for service in featured_services %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/service_card.html' with service=service %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No services available.</div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="{% url 'services' %}" class="btn btn-outline-primary btn-lg">View All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Our Projects</span>
+            <h2 class="section-title">Featured Work</h2>
+            <p class="section-subtitle mx-auto">Explore some of our most impactful technology deployments.</p>
+        </div>
+        <div class="row g-4">
+            {% for project in featured_projects %}
+            <div class="col-md-6 col-lg-4">
+                <a href="{{ project.get_absolute_url }}" class="text-decoration-none">
+                    {% include 'website/partials/cards/project_card.html' with project=project %}
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No projects available.</div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="{% url 'projects' %}" class="btn btn-outline-primary btn-lg">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section section-light">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Testimonials</span>
+            <h2 class="section-title">What Our Clients Say</h2>
+        </div>
+        <div class="row g-4">
+            {% for testimonial in testimonials %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/testimonial_card.html' with testimonial=testimonial %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No testimonials yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Clients -->
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Trusted By</span>
+            <h2 class="section-title">Our Clients</h2>
+        </div>
+        <div class="logo-track d-flex flex-wrap justify-content-center align-items-center gap-5">
+            {% for client in clients %}
+            {% if client.logo %}
+            <img src="{{ client.logo.url }}" alt="{{ client.name }}" class="client-logo" loading="lazy">
+            {% else %}
+            <span class="fw-bold text-muted">{{ client.name }}</span>
+            {% endif %}
+            {% empty %}
+            <div class="text-muted">No clients listed yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Blog Preview -->
+<section class="section section-light">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Latest News</span>
+            <h2 class="section-title">From Our Blog</h2>
+        </div>
+        <div class="row g-4">
+            {% for post in latest_posts %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/blog_card.html' with post=post %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No blog posts yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container reveal">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Let’s discuss how Skyblue Technology can help you achieve your goals with innovative technology solutions.</p>
+        <a href="{% url 'contact' %}" class="btn btn-light btn-lg">Contact Us Today</a>
+    </div>
+</section>
+{% endblock %}

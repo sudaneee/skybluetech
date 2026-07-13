@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Contact Message</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #334155;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 16px;">
+        <h2 style="color: #0f172a;">New Contact Message</h2>
+        <p><strong>Name:</strong> {{ message.name }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ message.email }}">{{ message.email }}</a></p>
+        <p><strong>Phone:</strong> {{ message.phone|default:"N/A" }}</p>
+        <p><strong>Subject:</strong> {{ message.subject }}</p>
+        <hr style="border: none; border-top: 1px solid #e2e8f0;">
+        <p><strong>Message:</strong></p>
+        <p>{{ message.message|linebreaksbr }}</p>
+        <hr style="border: none; border-top: 1px solid #e2e8f0;">
+        <p style="color: #64748b; font-size: 12px;">Submitted on {{ message.created_at }}</p>
+    </div>
+</body>
+</html>

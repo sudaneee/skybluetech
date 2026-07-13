@@ -1,0 +1,9 @@
+{% load website_extras %}
+<div class="project-card reveal">
+    <div class="project-image" style="{% if project.cover_image %}background-image:url('{{ project.cover_image.url }}');{% else %}background:linear-gradient(135deg, var(--skyblue-primary), var(--skyblue-sky));{% endif %}">
+        <div class="project-overlay">
+            <span>{{ project.category }}</span>
+            <h4>{{ project.title }}</h4>
+        </div>
+    </div>
+</div>

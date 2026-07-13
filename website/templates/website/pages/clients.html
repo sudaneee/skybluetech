@@ -1,0 +1,49 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}Our Clients{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title="Our Clients" subtitle="Organizations that trust Skyblue Technology for their digital transformation." %}
+
+<section class="section section-light">
+    <div class="container">
+        <div class="row g-4 justify-content-center align-items-center">
+            {% for client in clients %}
+            <div class="col-6 col-md-4 col-lg-3 text-center reveal">
+                {% if client.logo %}
+                <img src="{{ client.logo.url }}" alt="{{ client.name }}" class="client-logo" loading="lazy">
+                {% else %}
+                <div class="p-4 rounded-4 bg-white shadow-sm">
+                    <h5 class="mb-0">{{ client.name }}</h5>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-people fs-1 text-muted"></i>
+                <p class="mt-3 text-muted">No clients listed yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% if testimonials %}
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Testimonials</span>
+            <h2 class="section-title">What They Say About Us</h2>
+        </div>
+        <div class="row g-4">
+            {% for testimonial in testimonials %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/testimonial_card.html' with testimonial=testimonial %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

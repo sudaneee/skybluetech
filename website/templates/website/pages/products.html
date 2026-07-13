@@ -1,0 +1,26 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title="Our Products" subtitle="Explore our innovative technology products built for education, healthcare, commerce, and payments." %}
+
+<section class="section">
+    <div class="container">
+        <div class="row g-4">
+            {% for product in products %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/product_card.html' with product=product %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-box-seam fs-1 text-muted"></i>
+                <p class="mt-3 text-muted">No products available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% include 'website/partials/pagination.html' %}
+    </div>
+</section>
+{% endblock %}

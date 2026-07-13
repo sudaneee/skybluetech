@@ -1,0 +1,274 @@
+/*
+ * Skyblue Technology — Django Admin Custom Styles
+ */
+
+:root {
+    --skyblue-navy: #0f172a;
+    --skyblue-primary: #0d6efd;
+    --skyblue-sky: #38bdf8;
+    --skyblue-light: #f8f9fa;
+    --skyblue-text: #334155;
+    --skyblue-muted: #64748b;
+    --skyblue-white: #ffffff;
+    --skyblue-border: #e2e8f0;
+    --skyblue-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* Header & Branding */
+#header {
+    background: var(--skyblue-navy) !important;
+    color: var(--skyblue-white) !important;
+    box-shadow: var(--skyblue-shadow);
+}
+
+#header a:link,
+#header a:visited {
+    color: var(--skyblue-white) !important;
+}
+
+#branding h1,
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: var(--skyblue-white) !important;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+#branding h1 a:hover {
+    color: var(--skyblue-sky) !important;
+}
+
+.site-name {
+    color: var(--skyblue-sky);
+}
+
+/* Sidebar / Module List */
+#nav-sidebar {
+    background: var(--skyblue-white);
+    border-right: 1px solid var(--skyblue-border);
+}
+
+#nav-sidebar .module th,
+#nav-sidebar .module caption {
+    background: var(--skyblue-light);
+    color: var(--skyblue-navy);
+    font-weight: 600;
+}
+
+#nav-sidebar .current-app .section:link,
+#nav-sidebar .current-app .section:visited {
+    color: var(--skyblue-primary);
+}
+
+#nav-sidebar a:hover {
+    color: var(--skyblue-primary);
+}
+
+/* Breadcrumbs */
+div.breadcrumbs {
+    background: var(--skyblue-light);
+    color: var(--skyblue-text);
+    border-bottom: 1px solid var(--skyblue-border);
+}
+
+div.breadcrumbs a {
+    color: var(--skyblue-primary);
+}
+
+/* Buttons */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+    background: var(--skyblue-primary);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+a.button:hover {
+    background: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+    background: var(--skyblue-navy);
+}
+
+.button.default:hover,
+input[type="submit"].default:hover,
+.submit-row input.default:hover {
+    background: #1e293b;
+}
+
+/* Module Headers */
+.module h2,
+.module caption,
+.inline-group h2 {
+    background: var(--skyblue-navy);
+    color: var(--skyblue-white);
+    border-radius: 8px 8px 0 0;
+    padding: 12px 16px;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background: var(--skyblue-white);
+    border: 1px solid var(--skyblue-border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--skyblue-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+}
+
+.dashboard-card .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+    background: rgba(13, 110, 253, 0.1);
+    color: var(--skyblue-primary);
+}
+
+.dashboard-card .number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--skyblue-navy);
+    margin-bottom: 4px;
+}
+
+.dashboard-card .label {
+    color: var(--skyblue-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Login Page */
+.login #header {
+    display: none;
+}
+
+.login #container {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.login-form-wrapper {
+    background: var(--skyblue-white);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--skyblue-shadow);
+    max-width: 420px;
+    width: 100%;
+}
+
+.login-form-wrapper .brand-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--skyblue-primary), var(--skyblue-sky));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: white;
+    font-size: 36px;
+}
+
+.login-form-wrapper h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--skyblue-navy);
+    margin-bottom: 8px;
+}
+
+.login-form-wrapper p.subtitle {
+    text-align: center;
+    color: var(--skyblue-muted);
+    margin-bottom: 32px;
+}
+
+/* Tables */
+#changelist table thead th {
+    background: var(--skyblue-light);
+    color: var(--skyblue-navy);
+    font-weight: 600;
+}
+
+#changelist table tbody tr:hover {
+    background: rgba(56, 189, 248, 0.05);
+}
+
+/* Filters */
+#changelist-filter {
+    background: var(--skyblue-white);
+    border-left: 1px solid var(--skyblue-border);
+}
+
+#changelist-filter h2 {
+    background: var(--skyblue-navy);
+    color: var(--skyblue-white);
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select,
+.vTextField {
+    border: 1px solid var(--skyblue-border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus,
+.vTextField:focus {
+    border-color: var(--skyblue-primary);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+    outline: none;
+}
+
+/* Footer */
+#footer {
+    border-top: 1px solid var(--skyblue-border);
+    color: var(--skyblue-muted);
+}
+
+/* Recent Actions */
+ul.actionlist li {
+    border-bottom: 1px solid var(--skyblue-border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    #nav-sidebar {
+        border-right: none;
+    }
+}

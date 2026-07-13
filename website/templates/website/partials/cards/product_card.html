@@ -1,0 +1,17 @@
+{% load website_extras %}
+<div class="product-card reveal">
+    <div class="product-image">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.title }}" loading="lazy">
+        {% else %}
+        <i class="bi {{ product.icon|default:'bi-box-seam' }}"></i>
+        {% endif %}
+    </div>
+    <div class="product-body">
+        <h4>{{ product.title }}</h4>
+        <p>{{ product.short_description|truncatewords:15 }}</p>
+        <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+            Learn More <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+    </div>
+</div>

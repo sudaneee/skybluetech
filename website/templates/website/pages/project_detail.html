@@ -1,0 +1,83 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title=project.title subtitle=project.category %}
+
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8 reveal">
+                {% if project.cover_image %}
+                <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" class="img-fluid rounded-4 shadow mb-4" loading="lazy">
+                {% endif %}
+
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    {% if project.client %}
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-person-badge me-1"></i> Client: {{ project.client }}</span>
+                    {% endif %}
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-flag me-1"></i> Status: {{ project.get_status_display }}</span>
+                    {% if project.completion_date %}
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-calendar me-1"></i> Completed: {{ project.completion_date|date:"F Y" }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="content">
+                    {{ project.description|safe }}
+                </div>
+
+                {% if technologies %}
+                <h4 class="mt-5 mb-3">Technologies Used</h4>
+                <div class="d-flex flex-wrap gap-2">
+                    {% for tech in technologies %}
+                    <span class="badge bg-primary">{{ tech.name }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if gallery %}
+                <h4 class="mt-5 mb-4">Project Gallery</h4>
+                <div class="row g-3">
+                    {% for image in gallery %}
+                    <div class="col-md-4 col-6">
+                        <a href="{{ image.image.url }}" target="_blank" rel="noopener">
+                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}" class="img-fluid rounded-4 shadow" loading="lazy">
+                        </a>
+                        {% if image.caption %}<p class="small text-muted mt-1">{{ image.caption }}</p>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-4 reveal">
+                <div class="card-skyblue sticky-lg-top" style="top:100px;z-index:1;">
+                    <h4>Project Summary</h4>
+                    <ul class="list-unstyled mt-3">
+                        {% if project.client %}<li class="mb-2"><strong>Client:</strong> {{ project.client }}</li>{% endif %}
+                        {% if project.category %}<li class="mb-2"><strong>Category:</strong> {{ project.category }}</li>{% endif %}
+                        <li class="mb-2"><strong>Status:</strong> {{ project.get_status_display }}</li>
+                        {% if project.completion_date %}<li class="mb-2"><strong>Completed:</strong> {{ project.completion_date|date:"F Y" }}</li>{% endif %}
+                    </ul>
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100 mt-3">Start a Similar Project</a>
+                </div>
+
+                {% if related_projects %}
+                <div class="mt-4">
+                    <h5 class="mb-3">Related Projects</h5>
+                    {% for item in related_projects %}
+                    <a href="{{ item.get_absolute_url }}" class="d-block mb-3 text-decoration-none">
+                        <div class="rounded-4 overflow-hidden shadow-sm" style="height:140px;background:{% if item.cover_image %}url('{{ item.cover_image.url }}') center/cover{% else %}linear-gradient(135deg,var(--skyblue-primary),var(--skyblue-sky)){% endif %};"></div>
+                        <h6 class="mt-2 mb-0">{{ item.title }}</h6>
+                        <small class="text-muted">{{ item.category }}</small>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

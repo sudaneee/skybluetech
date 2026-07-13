@@ -1,0 +1,19 @@
+{% load website_extras %}
+<div class="testimonial-card reveal">
+    <div class="quote-icon"><i class="bi bi-quote"></i></div>
+    <p class="comment">"{{ testimonial.comment|truncatewords:30 }}"</p>
+    <div class="author">
+        {% if testimonial.author_photo %}
+        <img src="{{ testimonial.author_photo.url }}" alt="{{ testimonial.author_name }}" loading="lazy">
+        {% else %}
+        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center" style="width:56px;height:56px;color:#fff;">
+            <i class="bi bi-person-fill fs-4"></i>
+        </div>
+        {% endif %}
+        <div>
+            <h6>{{ testimonial.author_name }}</h6>
+            <span>{{ testimonial.author_title }}{% if testimonial.company %}, {{ testimonial.company }}{% endif %}</span>
+            <div class="mt-1">{{ testimonial.rating|stars }}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{% load website_extras %}
+<div class="team-card reveal">
+    {% if member.photo %}
+    <img src="{{ member.photo.url }}" alt="{{ member.name }}" class="team-photo" loading="lazy">
+    {% else %}
+    <div class="team-photo d-flex align-items-center justify-content-center bg-light mx-auto">
+        <i class="bi bi-person-fill fs-1 text-muted"></i>
+    </div>
+    {% endif %}
+    <h4>{{ member.name }}</h4>
+    <div class="role">{{ member.role }}</div>
+    <p class="text-muted small">{{ member.biography|striptags|truncatewords:20 }}</p>
+    <div class="social-links">
+        {% if member.email %}
+        <a href="mailto:{{ member.email }}"><i class="bi bi-envelope"></i></a>
+        {% endif %}
+        {% if member.linkedin %}
+        <a href="{{ member.linkedin }}" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
+        {% endif %}
+        {% if member.facebook %}
+        <a href="{{ member.facebook }}" target="_blank" rel="noopener"><i class="bi bi-facebook"></i></a>
+        {% endif %}
+        {% if member.twitter %}
+        <a href="{{ member.twitter }}" target="_blank" rel="noopener"><i class="bi bi-twitter-x"></i></a>
+        {% endif %}
+    </div>
+</div>

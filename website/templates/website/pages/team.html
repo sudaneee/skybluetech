@@ -1,0 +1,46 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}Our Team{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title="Our Team" subtitle="Meet the visionaries and experts behind Skyblue Technology." %}
+
+<!-- Executives -->
+{% if executives %}
+<section class="section section-light">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">Leadership</span>
+            <h2 class="section-title">Executive Team</h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+            {% for member in executives %}
+            <div class="col-md-6 col-lg-4">
+                {% include 'website/partials/cards/team_card.html' with member=member %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- All Team -->
+{% if members %}
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="text-primary fw-bold text-uppercase">The Team</span>
+            <h2 class="section-title">Meet Everyone</h2>
+        </div>
+        <div class="row g-4">
+            {% for member in members %}
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                {% include 'website/partials/cards/team_card.html' with member=member %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

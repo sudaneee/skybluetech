@@ -1,0 +1,22 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}{{ privacy.title }}{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title=privacy.title subtitle="Last updated: "|add:privacy.last_updated|date:"F d, Y" %}
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card-skyblue">
+                    <div class="content">
+                        {{ privacy.content|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

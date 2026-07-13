@@ -1,0 +1,11 @@
+{% load website_extras %}
+<div class="service-card reveal">
+    <div class="service-icon">
+        <i class="bi {{ service.icon|default:'bi-gear' }}"></i>
+    </div>
+    <h4>{{ service.title }}</h4>
+    <p>{{ service.short_description|truncatewords:15 }}</p>
+    <a href="{{ service.get_absolute_url }}" class="btn btn-link px-0">
+        Read More <i class="bi bi-arrow-right"></i>
+    </a>
+</div>

@@ -1,0 +1,47 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}{{ job.title }}{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title=job.title subtitle=job.department %}
+
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8 reveal">
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-geo-alt me-1"></i> {{ job.location }}</span>
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-briefcase me-1"></i> {{ job.get_type_display }}</span>
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-calendar me-1"></i> Posted {{ job.posted_at|date:"F d, Y" }}</span>
+                    {% if job.closes_at %}
+                    <span class="badge bg-light text-dark p-2"><i class="bi bi-clock me-1"></i> Closes {{ job.closes_at|date:"F d, Y" }}</span>
+                    {% endif %}
+                </div>
+
+                <h3 class="mb-3">About the Role</h3>
+                <div class="content mb-5">{{ job.description|safe }}</div>
+
+                <h3 class="mb-3">Requirements</h3>
+                <div class="content mb-5">{{ job.requirements|safe }}</div>
+
+                {% if job.benefits %}
+                <h3 class="mb-3">Benefits</h3>
+                <div class="content">{{ job.benefits|safe }}</div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-4 reveal">
+                <div class="card-skyblue sticky-lg-top" style="top:100px;z-index:1;">
+                    <h4>Apply for this Role</h4>
+                    <p class="text-muted">Interested in this position? Send your CV and cover letter to our recruitment team.</p>
+                    <a href="mailto:{{ site_settings.contact_email }}?subject=Application for {{ job.title }}" class="btn btn-primary w-100 mb-3">
+                        Apply Now
+                    </a>
+                    <a href="{% url 'careers' %}" class="btn btn-outline-primary w-100">Back to Careers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'website/base.html' %}
+{% load website_extras %}
+
+{% block title %}{{ service.title }}{% endblock %}
+
+{% block content %}
+{% include 'website/partials/page_header.html' with title=service.title subtitle=service.short_description %}
+
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8 reveal">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid rounded-4 shadow mb-4" loading="lazy">
+                {% endif %}
+                <div class="content">
+                    {{ service.description|safe }}
+                </div>
+
+                {% if features %}
+                <h3 class="mt-5 mb-4">What We Offer</h3>
+                <div class="row g-3">
+                    {% for feature in features %}
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start p-3 rounded-4 bg-light">
+                            <i class="bi {{ feature.icon|default:'bi-check-circle-fill' }} text-primary fs-4 me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">{{ feature.name }}</h6>
+                                {% if feature.description %}<p class="text-muted small mb-0">{{ feature.description }}</p>{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-4 reveal">
+                <div class="card-skyblue sticky-lg-top" style="top:100px;z-index:1;">
+                    <div class="service-icon">
+                        <i class="bi {{ service.icon|default:'bi-gear' }}"></i>
+                    </div>
+                    <h4>{{ service.title }}</h4>
+                    <p class="text-muted">{{ service.short_description }}</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Get a Quote</a>
+                </div>
+
+                {% if related_services %}
+                <div class="mt-4">
+                    <h5 class="mb-3">Related Services</h5>
+                    {% for item in related_services %}
+                    <a href="{{ item.get_absolute_url }}" class="d-flex align-items-center p-3 mb-2 bg-white rounded-4 shadow-sm text-decoration-none">
+                        <i class="bi {{ item.icon|default:'bi-gear' }} text-primary fs-4 me-3"></i>
+                        <div>
+                            <h6 class="mb-0">{{ item.title }}</h6>
+                            <small class="text-muted">{{ item.short_description|truncatewords:6 }}</small>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
